@@ -5,6 +5,7 @@ const columns = 9;
 let currentTile;
 let otherTile;
 const myBoard = document.getElementById("board");
+const score = document.getElementById("score");
 
 window.onload(() => {
     startGame();
@@ -38,6 +39,10 @@ const startGame = () => {
             tile.addEventListener("drop", dragDrop); // drop candy over other candy
             tile.addEventListener("dragend", dragEnd); // after drag process is completed, we swap candies
 
+            myBoard.append(tile);
+            rows.push(tile);
         }
+        board.push(row);
     }
+    console.log(board);
 }
