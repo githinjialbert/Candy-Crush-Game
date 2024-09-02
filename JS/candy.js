@@ -115,6 +115,47 @@ const crushCandy = () => {
     crushThree();
 }
 
+
 const crushThree = () => {
+
+    // Check for rows
     
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < columns - 2; c++) {
+
+            let candy1 = board[r][c];
+            let candy2 = board[r][c + 1];
+            let candy3 = board[r][c + 2];
+
+            if (candy1.src === candy2.src && candy2.src === candy3.src && !candy1.scr.includes("blank")) {
+
+                candy1.src = "./images/blank.png";
+                candy2.src = "./images/blank.png";
+                candy3.src = "./images/blank.png";
+                score += 30;
+                
+            }
+        }
+    }
+
+    //Check for columns
+
+    for (let c = 0; c < columns; c++) {
+        for (let r = 0; r < rows - 2; r++) {
+
+            let candy1 = board[r][c];
+            let candy2 = board[r + 1][c];
+            let candy3 = board[r + 2][c];
+
+            if (candy1.src === candy2.src && candy2.src === candy3.src && !candy1.scr.includes("blank")) {
+
+            candy1.src = "./images/blank.png";
+            candy2.src = "./images/blank.png";
+            candy3.src = "./images/blank.png";
+            score += 30;
+                
+            }
+
+        }
+    }
 }
