@@ -46,3 +46,75 @@ const startGame = () => {
     }
     console.log(board);
 }
+
+const dragStart = () => {
+    currentTile = this;
+}
+
+const dragOver = (e) => {
+    e.preventDefault();
+}
+
+const dragEnter = (e) => {
+    e.preventDefault();
+}
+
+const dragLeave = () => {}
+
+const dragDrop = () => {
+    otherTile = this;
+}
+
+const dragEnd = () => {
+    if (currentTile.src.includes("blank") || otherTile.src.includes("blank")) {
+        return;
+    }
+
+    //Determining the exact positions of the currentTile and otherTile
+
+    let currCoords = currTile.id.split("-"); // converts it to an array from "0-0" to ["0", "0"]
+    let r = parseInt(currCoords[0]);
+    let c = parseInt(currCoords[1]);
+
+    let otherCoords = otherTile.id.split("-"); 
+    let r2 = parseInt(otherCoords[0]);
+    let c2 = parseInt(otherCoords[1]);
+
+    //Checking whether the two tiles are adjacent to each other
+
+    //Horizontal Movements
+    let moveLeft = c2 == c-1 && r == r2;
+    let moveRight = c2 == c+1 && r == r2;
+
+    //Vertical Movements
+    let moveUp = r2 == r-1 && c == c2;
+    let moveDown = r2 == r+1 && c == c2;
+
+    let isAdjacent = moveLeft || moveRight || moveDown || moveUp;
+
+    if (isAdjacent) {
+        let currentImg = currentTile.src;
+        let otherImg = otherTile.src;
+
+        currentTile.src = otherImg;
+        otherTile.src = currentImg;
+
+        let validMove = checkValid();
+
+        if (!validMove) {
+        let currentImg = currentTile.src;
+        let otherImg = otherTile.src;
+
+        currentTile.src = otherImg;
+        otherTile.src = currentImg;
+        }
+    }
+}
+
+const crushCandy = () => {
+    crushThree();
+}
+
+const crushThree = () => {
+    
+}
