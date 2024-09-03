@@ -119,7 +119,7 @@ const crushCandy = () => {
 const crushThree = () => {
 
     // Check for rows
-    
+
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < columns - 2; c++) {
 
@@ -156,6 +156,63 @@ const crushThree = () => {
                 
             }
 
+        }
+    }
+}
+
+
+const checkValid = () => {
+
+    //Check for rows 
+
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < columns - 2; c++) {
+            let candy1 = board[r][c];
+            let candy2 = board[r][c + 1];
+            let candy3 = board[r][c + 2];
+            
+            if (candy1.src === candy2.scr && candy2.src === candy3.src && !candy1.src.includes("blank")) {
+                return true;
+            }
+        }
+    }
+
+    //Check for columns 
+
+    for (let c = 0; c < columns; c++) {
+        for (let r = 0; r < rows - 2; r++) {
+
+            let candy1 = board[r][c];
+            let candy2 = board[r + 1][c];
+            let candy3 = board[r + 2][c];
+
+            if (candy1.src === candy2.src && candy2.src === candy3.src && !candy1.scr.includes("blank")) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+const slideCandy = () => {
+    for (let c = 0; c < columns; c++) {
+        let ind = rows - 1;
+        for (let r = columns - 1; r >= 0; r--) {
+            if (!board[r][c].src.includes("blank")) {
+                board[ind][c].src = board[r][c].src;
+                ind -= 1;
+            }
+        }
+        for (let r = ind; r >= 0; r--) {
+            board[r][c].src = "./images/blank.png";
+        }
+    }
+}
+
+const generateCandy = () => {
+    for (let c = 0; c < columns; c++) {
+        if (board[0][c].src.includes("blank")) {
+            board[0][c].src = "./images/" + randomCandy() + ".png";
         }
     }
 }
